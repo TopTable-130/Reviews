@@ -87,7 +87,7 @@ Topable
 ```
 
 
-### Update restaurant info
+### Update restaurant Review
   * PATCH `/resutrant/:id/reivews/:reviewId`
 
 **Path Parameters:**
@@ -111,7 +111,7 @@ Topable
     }
 ```
 
-### Delete restaurant
+### Delete restaurant review
   * DELETE '/resturant/:id/reviews/:reviewId'`
 
 **Path Parameters:**
