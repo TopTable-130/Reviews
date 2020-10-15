@@ -14,8 +14,8 @@ Topable
 
 ## Server API
 
-### Get restaurant info
-  * GET `/api/restaurants/:id`
+### Get restaurant all resturant reviews
+  * GET `/resturant/:id/reviews`
 
 **Path Parameters:**
   * `id` restaurant id
@@ -25,40 +25,76 @@ Topable
 **Returns:** JSON
 
 ```json
+  [
     {
       "id": "Number",
-      "name": "String",
-      "address": "String",
-      "phone": "String",
-      "website": "String",
-      "cost": "Number"
-    }
+      "id_restaurants": "Number",,
+      "avatar": "Image URL",
+      "first_name": "Emmet",
+      "last_name": "Streich",
+      "number_of_reviews": "Number",,
+      "locale": "Ondrickaborough",
+      "create_date_month": "String Month ",
+      "create_date_day": "String Date DD",,
+      "create_date_year": "String Year YYYY",
+      "review_message": "String",
+      "rating_overall": "Number",,
+      "rating_recent": "Number",,
+      "rating_food": "Number",,
+      "rating_service": "Number",,
+      "rating_ambience": "Number",,
+      "noise_level": "String",
+      "would_recommend": "Number",,
+      "loved_for": "String",
+      "filters": "String"
+  },
+  .
+  .
+  .
+]
 ```
 
-### Add restaurant
-  * POST `/api/restaurants`
-
-**Success Status Code:** `201`
+### Add restaurant reviews
+  * POST `/resutrant/:id/reviews/:user`
+**Path Parameters:**
+  * `:id` restaurant id, `:user` user id
+**Success Status Code:** `200`
 
 **Request Body**: Expects JSON with the following keys.
 
 ```json
-    {
-      "name": "String",
-      "address": "String",
-      "phone": "String",
-      "website": "String",
-      "googleMap": "String location",
-      "cost": "Number"
-    }
+    
+  {
+    
+     "id_restaurants": "Number",,
+      "avatar": "Image URL",
+      "first_name": "Emmet",
+      "last_name": "Streich",
+      "number_of_reviews": "Number",,
+      "locale": "String",
+      "create_date_month": "String Month ",
+      "create_date_day": "String Date DD",,
+      "create_date_year": "String Year YYYY",
+      "review_message": "String",
+      "rating_overall": "Number",,
+      "rating_recent": "Number",,
+      "rating_food": "Number",,
+      "rating_service": "Number",,
+      "rating_ambience": "Number",,
+      "noise_level": "String",
+      "would_recommend": "Number",,
+      "loved_for": "String",
+      "filters": "String"
+  }
+    
 ```
 
 
 ### Update restaurant info
-  * PATCH `/api/restaurant/:id`
+  * PATCH `/resutrant/:id/reivews/:reviewId`
 
 **Path Parameters:**
-  * `id` restaurant id
+  * `id` restaurant id, `:reviewId` review Id
 
 **Success Status Code:** `204`
 
@@ -66,49 +102,26 @@ Topable
 
 ```json
     {
-      "name": "String",
-      "address": "String",
-      "phone": "String",
-      "website": "String",
-      "cost": "Number"
+       "review_message": "String",
+      "rating_overall": "Number",,
+      "rating_recent": "Number",,
+      "rating_food": "Number",,
+      "rating_service": "Number",,
+      "rating_ambience": "Number",,
+      "noise_level": "String",
+      "would_recommend": "Number",,
+      "loved_for": "String",
     }
 ```
 
 ### Delete restaurant
-  * DELETE `/api/restaurant/:id`
+  * DELETE '/resturant/:id/reviews/:reviewId'`
 
 **Path Parameters:**
-  * `id` restaurant id
+ * `id` restaurant id, `:reviewId` review Id
 
 **Success Status Code:** `204`
-
-### Add image to restaurant
-  * POST `/api/restaurants/:restaurantId/images`
-
-**Path Parameters:**
-
-  * `restaurantId` restaurant id
-
-**Success Status Code:** `201`
-
-**Request Body**: Expects JSON with the following keys.
-
-```json
-    {
-      "user": "String",
-      "image": "image URL",
-      "description": "String",
-      "posted": "YYYY-MM-MM",
-      "googleMap": "String location",
-      "category": "String",
-      "restaurant": "id Number",
-      "cost": "Number"
-    }
-```
-
-
-
-
++
 
 
 
