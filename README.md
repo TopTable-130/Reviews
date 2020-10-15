@@ -48,9 +48,6 @@ Topable
       "loved_for": "String",
       "filters": "String"
   },
-  .
-  .
-  .
 ]
 ```
 
