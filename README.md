@@ -14,8 +14,8 @@ Topable
 
 ## Server API
 
-### Get restaurant all resturant reviews
-  * GET `/resturant/:id/reviews`
+### Get  all restaurant reviews
+  * GET `/restaurant/:id/reviews`
 
 **Path Parameters:**
   * `id` restaurant id
@@ -52,7 +52,7 @@ Topable
 ```
 
 ### Add restaurant reviews
-  * POST `/resutrant/:id/reviews/:user`
+  * POST `/restaurant/:id/reviews/:user`
 **Path Parameters:**
   * `:id` restaurant id, `:user` user id
 **Success Status Code:** `200`
@@ -88,7 +88,7 @@ Topable
 
 
 ### Update restaurant Review
-  * PATCH `/resutrant/:id/reivews/:reviewId`
+  * PATCH `/restaurant/:id/reivews/:reviewId`
 
 **Path Parameters:**
   * `id` restaurant id, `:reviewId` review Id
@@ -112,7 +112,7 @@ Topable
 ```
 
 ### Delete restaurant review
-  * DELETE '/resturant/:id/reviews/:reviewId'`
+  * DELETE '/restaurant/:id/reviews/:reviewId'`
 
 **Path Parameters:**
  * `id` restaurant id, `:reviewId` review Id
