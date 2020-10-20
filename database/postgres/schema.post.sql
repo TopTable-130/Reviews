@@ -1,12 +1,13 @@
-DROP DATABASE IF EXISTS reviews;
+-- psql reviews_c_top -U owner <schema.post.sql
 
+DROP DATABASE IF EXISTS reviews_c_top;
 
-CREATE DATABASE reviews;
+CREATE DATABASE reviews_c_top;
 
-USE reviews;
+\c reviews_c_top
 
 CREATE TABLE restaurants (
-   id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name_of_restaurant varchar(50),
   number_of_reviews int,
   rating_overall decimal(2, 1),
@@ -52,7 +53,7 @@ CREATE TABLE review_list (
 );
 
 
-COPY restaurants ( name_of_restaurant, number_of_reviews, rating_overall, rating_recent, rating_food ,rating_service , rating_ambience , noise_level, would_recommend , percent_five_star , percent_four_star , percent_three_star , percent_two_star , percent_one_star ,loved_for, filters) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/restaurnt.csv' CSV HEADER;
+COPY restaurants ( name_of_restaurant, number_of_reviews, rating_overall, rating_recent, rating_food ,rating_service , rating_ambience , noise_level, would_recommend , percent_five_star , percent_four_star , percent_three_star , percent_two_star , percent_one_star ,loved_for, filters) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/restaurnt.csv'git  CSV HEADER;
 
 COPY users ( avatar , first_name,  last_name, number_of_reviews ,locale) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/users.csv' CSV HEADER;
 

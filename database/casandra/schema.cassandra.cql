@@ -12,7 +12,7 @@ CREATE TABLE restaurants (
   rating_ambience decimal,
   noise_level varchar,
   would_recommend BOOLEAN,
-   decimarcent_five_star decimal,
+  decimarcent_five_star decimal,
   percent_four_star decimal,
   percent_three_star decimal,
   percent_two_star decimal,
@@ -29,8 +29,7 @@ CREATE TABLE users (
   last_name varchar,
   number_of_reviews smallint,
   locale varchar,
-  PRIMARY KEY (
-    (id), locale));
+  PRIMARY KEY ((id), locale));
 
 CREATE TABLE review_resturant(
   id int,
