@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('../database/index.js');
+const controller = require (`./controller.js`);
 
 const app = express();
 const PORT = 3002;
@@ -46,6 +47,18 @@ app.get('/api/users', (req, res3) => {
     }
   });
 });
+
+
+
+
+app.get(`/resturant/:id/reviews`,controller.getAllReviews)
+
+app.post(`/resutrant/:id/review/:user`, controller.postNewReview)
+
+app.put(`/resutrant/:id/reivews/:reviewId`, controller.updateReivew)
+
+app.delete('/resturant/:id/reviews/:reviewId', controller.deleteReview)
+
 
 const server = app.listen(PORT, () => {
   // eslint-disable-next-line no-console

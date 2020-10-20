@@ -1,11 +1,11 @@
-DROP DATABASE IF EXISTS reviews;
+DROP DATABASE IF EXISTS reviews_c_top;
 
-CREATE DATABASE reviews;
+CREATE DATABASE reviews_c_top;
 
-USE reviews;
+\c reviews_c_top
 
 CREATE TABLE restaurants (
-  id int NOT NULL AUTO_INCREMENT,
+  id SERIAL PRIMARY KEY,
   name_of_restaurant varchar(50),
   number_of_reviews int,
   rating_overall decimal(2, 1),
@@ -22,22 +22,21 @@ CREATE TABLE restaurants (
   percent_one_star decimal(3, 2),
   loved_for varchar(100),
   filters varchar(100),
-  PRIMARY KEY (id)
+
 );
 
 CREATE TABLE users (
-  id int NOT NULL AUTO_INCREMENT,
+  id SERIAL PRIMARY KEY,
   avatar varchar(100),
   first_name varchar(20),
   last_name varchar(20),
   number_of_reviews smallint,
   locale varchar(50),
-  PRIMARY KEY (id)
 );
 
 CREATE TABLE review_list (
-  id int NOT NULL AUTO_INCREMENT,
-  id_restaurants int,
+  id SERIAL PRIMARY KEY,
+  id_restaurants int NOT NULL REFERENCES restaurants(id),
   avatar varchar(100),
   first_name varchar(20),
   last_name varchar(20),
@@ -56,7 +55,4 @@ CREATE TABLE review_list (
   would_recommend tinyint,
   loved_for varchar(150),
   filters varchar(150),
-  PRIMARY KEY (id),
-  FOREIGN KEY (id_restaurants)
-    REFERENCES restaurants(id)
 );
