@@ -28,3 +28,7 @@ images
 *.csv
 
 test.js
+
+# New Relic and stress testing
+newrelic.js
+k6

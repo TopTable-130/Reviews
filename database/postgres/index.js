@@ -19,8 +19,9 @@ const getRestaurantRating = (id, callback) => {
       callback(err);
     } else {
       // console.log('successful MySQL select * from transactions query');
-      console.log(data)
+      console.log(data.rows[0])
       callback(null, data.rows[0]);
+      db.end()
     }
   });
 };
@@ -33,7 +34,7 @@ const getReviewList = (id, callback) => {
       callback(err);
     } else {
       console.log('successful MySQL select * from transactions query');
-      callback(null, data);
+      callback(null, data.rows[0]);
     }
   });
 };
@@ -46,7 +47,7 @@ const getAllUsers = (callback) => {
       callback(err);
     } else {
       console.log('successful MySQL select * from transactions query');
-      callback(null, data);
+      callback(null, data.rows[0]);
     }
   });
 };
