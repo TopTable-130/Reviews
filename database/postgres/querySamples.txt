@@ -1,0 +1,35 @@
+
+Get Reviews by restaurant in order by date 
+select id, id_user, date_review from review_list where id_restaurants = 565555
+ORDER BY 
+date_review DESC;
+    id    | id_user | date_review 
+----------+---------+-------------
+ 38915433 | 3762166 | 2000-09-24
+ 38915434 | 3762166 | 2000-09-24
+ 68314341 |   10578 | 2000-08-26
+ 68314342 |   10578 | 2000-08-26
+(4 rows)
+
+Time: 2.604 ms
+
+
+
+Incert a new Review 
+
+reviews_c_top=# insert into review_list VALUES (75000008,5034408, 555345, '2000-09-25', 'Just loved the place', 5, 5, 5, 5, 2, 1, 3, ' family','bobs burgers');
+INSERT 0 1
+Time: 23.182 ms
+reviews_c_top=# insert into review_list VALUES (75000010,5034408, 555345, '2000-09-25', 'Just loved the place', 5, 5, 5, 5, 2, 1, 3, ' family','bobs burgers');
+INSERT 0 1
+Time: 4.071 ms
+reviews_c_top=# 
+
+Delete a review 
+
+reviews_c_top=# Delete From review_list where id = 75000010;
+DELETE 1
+Time: 5.657 ms
+reviews_c_top=# 
+
+

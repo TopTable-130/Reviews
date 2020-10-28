@@ -17,7 +17,6 @@ var makeNames = () => {
 }
 makeNames()
 
-
 // Random number generator function
 const randomInt = (max) => {
   return Math.floor(Math.random() * max) + 1
@@ -48,7 +47,7 @@ const dataGenUsers = (seed) => {
 
     userArr.push(user)
     var user = {
-      id: counter+=1,
+      id: counter += 1,
       avatar: `https://sdc-reviews-130.s3-us-west-1.amazonaws.com/image${countImage}.jpg`,
       first_name: firstNames[randomInt(10000)],
       last_last: lastNames[randomInt(10000)],
@@ -118,7 +117,7 @@ const dataGenRestaurant = (seed) => {
     var stars = StartRating()
 
     writer1.write({
-      id: counter+=1,
+      id: counter += 1,
       name_of_restaurant: restaurnantNameGen(),
       number_of_reviews: randomInt(25),
       rating_overall: (Math.random() * 5).toFixed(2),
@@ -152,13 +151,11 @@ const messageGen = (seed) => {
 
 messageGen(1000)
 // date generation over three montsh
-
-
 // zero padding helper function
 var zeroPadd = (number) => {
-  if (number < 10){
+  if (number < 10) {
 
-    return '0'+number
+    return '0' + number
   }
   else {
     return number
@@ -172,25 +169,25 @@ dateGen = () => {
   return newDate = `${year}-${month}-${day}`
 }
 
-const dataGenReviews = async(seed, reviewbyRestName, reviewByUserName) => {
+const dataGenReviews = async (seed, reviewbyRestName, reviewByUserName) => {
   var writer1 = csvWriter();
   var writer2 = csvWriter();
   writer1.pipe(fs.createWriteStream(reviewbyRestName));
   writer2.pipe(fs.createWriteStream(reviewByUserName));
   var counter = 0;
-  var numberOfUsers = userArr.length -1
+  var numberOfUsers = userArr.length - 1
   for (var k = 0; k < seed; k++) {
-if( k % 1000 === 0){
-  console.log(k)
-}
+    if (k % 1000 === 0) {
+      console.log(k)
+    }
     var user = userArr[randomInt(numberOfUsers)]
 
     var reviewObj = {
       id_restaurants: randomInt(500),
       id_user: user.id,
-      avatar :user.avatar,
-      first_name :user.first_name,
-      last_name : user.last_name,
+      avatar: user.avatar,
+      first_name: user.first_name,
+      last_name: user.last_name,
       date_review: dateGen(),
       review_message: messages[randomInt(500)],
       rating_overall: randomInt(5),
@@ -206,11 +203,11 @@ if( k % 1000 === 0){
     };
 
     var reviewByRestaurant = {
-      id: counter+=1,
+      id: counter += 1,
       id_restaurants: reviewObj.id_restaurants,
-      avatar :reviewObj.avatar,
-      first_name :reviewObj.frist_name,
-      last_name : reviewObj.last_name,
+      avatar: reviewObj.avatar,
+      first_name: reviewObj.frist_name,
+      last_name: reviewObj.last_name,
       date_review: reviewObj.date_review,
       review_message: reviewObj.review_message,
       rating_overall: reviewObj.rating_overall,
@@ -224,12 +221,12 @@ if( k % 1000 === 0){
       filters: reviewObj.filters
     }
 
-      var reviewByUsers = {
-      id: counter+=1,
+    var reviewByUsers = {
+      id: counter += 1,
       id_user: reviewObj.id_restaurants,
-      avatar :reviewObj.avatar,
-      first_name :reviewObj.frist_name,
-      last_name : reviewObj.last_name,
+      avatar: reviewObj.avatar,
+      first_name: reviewObj.frist_name,
+      last_name: reviewObj.last_name,
       date_review: reviewObj.date_review,
       review_message: reviewObj.review_message,
       rating_overall: reviewObj.rating_overall,
@@ -244,114 +241,27 @@ if( k % 1000 === 0){
     }
     writer2.write(reviewByUsers)
     writer1.write(reviewByRestaurant)
-    // if( k % 50000 === 0 ){
-    // if(!thing1|| !thing2  ){
-    // if( k === (seed*.1) || k ===(seed*.2) || k === (seed*.3) || k === (seed*.7)|| k === (seed*.5) || k === (seed*.6) || k === (seed*.7) || k === (seed*.8) || k === (seed*.9)) {
-    //   await new Promise(resolve => writer1.once('drain', resolve))
-    //   await new Promise(resolve => writer2.once('drain', resolve))
-    // }
-    // if(!writer2.write(reviewByUsers)){
 
-    //   await new Promise(resolve => writer2.once('drain', resolve))
-    //   }
-    // if(!writer1.write(reviewByUsers)){
-    // await new Promise(resolve => writer1.once('drain', resolve))
-    // }
+    if (k === (seed * .1) || k === (seed * .2) || k === (seed * .3) || k === (seed * .7) || k === (seed * .5) || k === (seed * .6) || k === (seed * .7) || k === (seed * .8) || k === (seed * .9)) {
+      await new Promise(resolve => writer1.once('drain', resolve))
+      await new Promise(resolve => writer2.once('drain', resolve))
+    }
   }
 
   writer1.end()
   writer2.end();
   console.log("done", reviewbyRestName, reviewByUserName)
-
 };
 
-
-
-
-
-
- function genCSV(){
+function genCSV() {
   dataGenUsers(5000001);
- dataGenReviews(7500000,"reviewbyRest1.csv","reviewbyuser1.csv");
-  dataGenReviews(7500000,"reviewbyRest2.csv","reviewbyuser2.csv");
-  dataGenReviews(7500000,"reviewbyRest3.csv","reviewbyuser3.csv");
- dataGenRestaurant(10000000)
+  dataGenReviews(7500000, "reviewbyRest1.csv", "reviewbyuser1.csv");
+  dataGenReviews(7500000, "reviewbyRest2.csv", "reviewbyuser2.csv");
+  dataGenReviews(7500000, "reviewbyRest3.csv", "reviewbyuser3.csv");
+  dataGenRestaurant(10000000)
 
 }
 genCSV();
 
 
 // --max-old-space-size=13824 seedCSVcas.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const dataGenReviewsUsers = (seed) => {
-
-//   writer.pipe(fs.createWriteStream('reviews.csv'));
-//   var counter = 0;
-
-//   for (var i = 0; i < seed; i++) {
-
-
-
-//     writer.write({
-//       id: counter+=1,
-//       id_restaurants: randomInt(500),
-//       avatar: 'varchar',
-//       first_name :'varchar',
-//       last_name :'varchar',
-//       id_user: randomInt(500),
-//       date_review: dateGen(),
-//       review_message: messages[randomInt(500)],
-//       rating_overall: randomInt(5),
-//       rating_recent: randomInt(5),
-//       rating_food: randomInt(5),
-//       rating_service: randomInt(5),
-//       rating_ambience: randomInt(5),
-//       noise_level: noiseArr[randomInt(4)],
-//       would_recommend: Math.floor(Math.random()),
-//       loved_for: lovedForArr[randomInt(6)],
-//       loved_for: lovedForArr[randomInt(6)],
-//       filters: filterArr[randomInt(6)]
-//     })
-//   }
-//   writer.end();
-//   console.log("done")
-//   return "done"
-// };
-
-
-
-
-
-
-
-
-
-
-
-// dataGenUsers(500)
-// dataGenReviews(500);
-
-// dataGenRestaurant(500);
-
-// Promise.resolve()
-  // .then( dataGenRestaurant(500))
-  // .then(dataGenReviews(500))
-  //       .then( dataGenUs
-
-
-

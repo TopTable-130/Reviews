@@ -1,6 +1,4 @@
 
-
-
 import http from 'k6/http';
 import { check } from 'k6';
 import { Rate } from 'k6/metrics';
