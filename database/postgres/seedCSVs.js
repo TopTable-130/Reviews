@@ -2,7 +2,7 @@ const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 var faker = require('faker');
 var writer1 = csvWriter();
-var writer2= csvWriter();
+var writer2 = csvWriter();
 // var writer3= csvWriter();
 // create array of first names 500 long
 var firstNames = []
@@ -33,7 +33,7 @@ genLocation()
 //
 
 const dataGenUsers = (seed) => {
-console.log("user gen start")
+  console.log("user gen start")
   writer1.pipe(fs.createWriteStream('users.csv'));
   var counter = 0;
   var countImage = 0
@@ -101,7 +101,7 @@ const dataGenRestaurant = (seed) => {
   var counter = 0;
 
   for (var i = 0; i < seed; i++) {
-    if( i% 10000 === 0) {
+    if (i % 10000 === 0) {
       console.log(i)
     }
     var stars = StartRating()
@@ -131,11 +131,7 @@ const dataGenRestaurant = (seed) => {
   return 'done'
 };
 
-
-
-
 // generate reviews
-
 // messsage helper
 const messages = [""]
 const messageGen = (seed) => {
@@ -143,7 +139,6 @@ const messageGen = (seed) => {
     messages.push(faker.lorem.paragraph())
   }
 }
-
 messageGen(1000)
 // date generation over three montsh
 
@@ -165,68 +160,50 @@ const dataGenReviews = async (seed, fileName) => {
       console.log(i)
     }
     var stars = StartRating()
-let data = {
-  // id: counter+=1,
-  id_restaurants: randomInt(10000000),
-  id_user: randomInt(5000000),
-  date_review: dateGen(),
-  review_message: messages[randomInt(500)],
-  rating_overall: randomInt(5),
-  rating_recent: randomInt(5),
-  rating_food: randomInt(5),
-  rating_service: randomInt(5),
-  rating_ambience: randomInt(5),
-  noise_level: noiseArr[randomInt(4)],
-  would_recommend: Math.floor(Math.random()),
-  loved_for: lovedForArr[randomInt(6)],
-  loved_for: lovedForArr[randomInt(6)],
-  filters: filterArr[randomInt(6)]
-}
+    let data = {
+      // id: counter+=1,
+      id_restaurants: randomInt(10000000),
+      id_user: randomInt(5000000),
+      date_review: dateGen(),
+      review_message: messages[randomInt(500)],
+      rating_overall: randomInt(5),
+      rating_recent: randomInt(5),
+      rating_food: randomInt(5),
+      rating_service: randomInt(5),
+      rating_ambience: randomInt(5),
+      noise_level: noiseArr[randomInt(4)],
+      would_recommend: Math.floor(Math.random()),
+      loved_for: lovedForArr[randomInt(6)],
+      loved_for: lovedForArr[randomInt(6)],
+      filters: filterArr[randomInt(6)]
+    }
     writer3.write(data)
+    // uncomment this line if seeding on a system that does not have 13 gigs ram to devote to seeding.
+    // this will slow it down and has a side effect.
     // if (!writer3.write(data)) {
     //   await new Promise(resolve => writer3.once('drain', resolve))
     // }
-
   }
-
   writer3.end();
-
   console.log("done")
 };
 
-
-
-
-// dataGenUsers(500)
-// dataGenReviews(500);
-
-// dataGenRestaurant(500);
-
-// Promise.resolve()
-  // .then( dataGenRestaurant(500))
-  // .then(dataGenReviews(500))
-  //       .then( dataGenUs
-
-//  function  genCSV(){
-    //  dataGenUsers(5000000);
-    //  dataGenReviews(8750000,"reviews1.csv")
-    //   dataGenReviews(8750000,"reviews2.csv")
-     dataGenReviews(8750000,"reviews3.csv")
-     dataGenReviews(8750000,"reviews4.csv")
-    dataGenRestaurant(10000000);
-    console.log("done with seeder function ")
-
-  // }
-  // genCSV();
-
-  //  function genCSV(){
-  //   console.time("Time this");
-  //    dataGenUsers(500);
-  //    dataGenReviews(25000000,"review1.csv");
-  //    dataGenReviews(25000000,"reviews2.csv");
-  //    dataGenReviews(25000000,"reviews3.csv");
-  //    dataGenReviews(25000000,"reviews4.csv");
-  //   //await dataGenRestaurant(10000000);
-  //   console.timeEnd("Time this");
-  // }
-  // genCSV();
+// node --max-old-space-size=13240 seedCSVs.js
+function genCSV() {
+  dataGenUsers(5000000);
+  // dataGenReviews(2916666, "reviews1.csv")
+  // dataGenReviews(2916666, "reviews2.csv")
+  // dataGenReviews(2916666, "reviews3.csv")
+  // dataGenReviews(2916666, "reviews4.csv")
+  // dataGenReviews(2916666, "reviews5.csv")
+  // dataGenReviews(2916666, "reviews6.csv")
+  // dataGenReviews(2916666, "reviews7.csv")
+  // dataGenReviews(2916666, "reviews8.csv")
+  // dataGenReviews(2916666, "reviews9.csv")
+  // dataGenReviews(2916666, "reviews10.csv")
+  // dataGenReviews(2916666, "reviews11.csv")
+  // dataGenReviews(291667, "reviews12.csv")
+  dataGenRestaurant(10000000);
+  console.log("done with seeder function ")
+}
+genCSV();

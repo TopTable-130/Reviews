@@ -2,17 +2,18 @@ const model = require( `./model.js`);
 
 
 const getAllReviews = (req, res) => {
-  console.log("routeHit")
+
   const  { id } = req.params;
-  console.log(req.params, id)
+
   const params = [id];
   model.getAllReviews (params, (( err, results) => {
     if (err) {
+
       console.log(err, "we had an error in getAllReviews")
       res.status(400).send(err)
     } else {
-      console.log("winning")
-      res.status(200).send(results)
+      // console.log("winning",results.rows[0])
+      res.status(200).send(results.rows)
     }
   })
   )
@@ -33,7 +34,7 @@ const postNewReview =  (req, res) => {
       res.status(400).send(err)
     } else {
       console.log("winning")
-      res.status(200).send(results)
+      res.status(200).send(results.rows)
     }
   })
   )
@@ -48,7 +49,7 @@ const deleteReview =  (req, res) => {
       res.status(400).send(err)
     } else {
       console.log("winning")
-      res.status(200).send(results)
+      res.status(200).send(results.rows)
     }
   })
   )
@@ -68,7 +69,7 @@ const updateReivew = (req, res) => {
       res.status(400).send(err)
     } else {
       console.log("winning")
-      res.status(200).send(results)
+      res.status(200).send(results.rows)
     }
   })
   )
