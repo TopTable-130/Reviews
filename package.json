@@ -14,7 +14,9 @@
     "seed": "node database/data_seeding.js",
     "test": "jest",
     "test:coverage": "jest --verbose --coverage",
-    "load-test": " k6 run k6/testingScript.js "
+    "load-test": " k6 run k6/testingScript.js ",
+    "cluster-test": " k6 run k6/testingScriptCluster.js ",
+    "cluster": " nodemon server/clustering-index.js "
   },
   "dependencies": {
     "axios": "^0.20.0",

@@ -190,12 +190,20 @@ const dataGenReviews = async (seed, fileName) => {
 
 // node --max-old-space-size=13240 seedCSVs.js
 function genCSV() {
-  dataGenUsers(5000000);
-  dataGenReviews(8750000, "reviews1.csv")
-  dataGenReviews(8750000, "reviews2.csv")
-  dataGenReviews(8750000, "reviews3.csv")
-  dataGenReviews(8750000, "reviews4.csv")
-  dataGenRestaurant(10000000);
+  // dataGenUsers(5000000);
+  // dataGenReviews(2916666, "reviews1.csv")
+  // dataGenReviews(2916666, "reviews2.csv")
+  // dataGenReviews(2916666, "reviews3.csv")
+  // dataGenReviews(2916666, "reviews4.csv")
+  // dataGenReviews(2916666, "reviews5.csv")
+  // dataGenReviews(2916666, "reviews6.csv")
+  dataGenReviews(2916666, "reviews7.csv")
+  // dataGenReviews(2916666, "reviews8.csv")
+  // dataGenReviews(2916666, "reviews9.csv")
+  // dataGenReviews(2916666, "reviews10.csv")
+  // dataGenReviews(2916666, "reviews11.csv")
+  // dataGenReviews(291667, "reviews12.csv")
+  // dataGenRestaurant(10000000);
   console.log("done with seeder function ")
 }
 genCSV();

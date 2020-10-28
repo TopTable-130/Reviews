@@ -1,11 +1,12 @@
 -- psql postgres <schema.post.sql
 
+
 DROP DATABASE IF EXISTS reviews_c_top;
 
 CREATE DATABASE reviews_c_top;
 
 \connect reviews_c_top;
-
+\timing;
 CREATE TABLE restaurants (
   id SERIAL PRIMARY KEY,
   name_of_restaurant varchar(50),
@@ -52,17 +53,21 @@ CREATE TABLE review_list (
   filters varchar
 );
 
+ALTER TABLE review_list DISABLE TRIGGER ALL;
 
 \COPY restaurants ( name_of_restaurant, number_of_reviews, rating_overall, rating_recent, rating_food ,rating_service , rating_ambience , noise_level, would_recommend , percent_five_star , percent_four_star , percent_three_star , percent_two_star , percent_one_star ,loved_for, filters) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/restaurnt.csv' CSV HEADER;
 
 \COPY users ( avatar , first_name,  last_name, number_of_reviews ,locale) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/users.csv' CSV HEADER;
 
-\COPY review_list (id_restaurants, id_user, date_review, review_message, rating_overall, rating_recent, rating_food,  rating_service, rating_ambience, noise_level, would_recommend, loved_for, filters) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/reviews1.csv' CSV HEADER;
+-- \COPY review_list (id_restaurants, id_user, date_review, review_message, rating_overall, rating_recent, rating_food, rating_service, rating_ambience, noise_level, would_recommend, loved_for, filters) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/reviews1.csv' CSV HEADER;
 
-\COPY review_list (id_restaurants, id_user, date_review, review_message, rating_overall, rating_recent, rating_food,  rating_service, rating_ambience, noise_level, would_recommend, loved_for, filters) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/reviews2.csv' CSV HEADER;
+-- \COPY review_list (id_restaurants, id_user, date_review, review_message, rating_overall, rating_recent, rating_food,  rating_service, rating_ambience, noise_level, would_recommend, loved_for, filters) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/reviews2.csv' CSV HEADER;
 
-\COPY review_list (id_restaurants, id_user, date_review, review_message, rating_overall, rating_recent, rating_food,  rating_service, rating_ambience, noise_level, would_recommend, loved_for, filters) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/reviews3.csv' CSV HEADER;
+-- \COPY review_list (id_restaurants, id_user, date_review, review_message, rating_overall, rating_recent, rating_food,  rating_service, rating_ambience, noise_level, would_recommend, loved_for, filters) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/reviews3.csv' CSV HEADER;
+
+
 
 \COPY review_list (id_restaurants, id_user, date_review, review_message, rating_overall, rating_recent, rating_food,  rating_service, rating_ambience, noise_level, would_recommend, loved_for, filters) FROM '/Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/reviews4.csv' CSV HEADER;
+
 
 

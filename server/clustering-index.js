@@ -18,7 +18,7 @@ if (cluster.isMaster) {
 
 
   const app = express();
-  const PORT = 3002;
+  const PORT = 3000;
   // swithching out body parse to native javascript middleware
   app.use(express.json())
   // app.use(bodyParser.json());

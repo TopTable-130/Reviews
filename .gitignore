@@ -32,3 +32,4 @@ test.js
 # New Relic and stress testing
 newrelic.js
 k6
+*.zip
