@@ -1,8 +1,8 @@
 {
   "name": "review_service",
   "version": "1.0.0",
-  "description": "TKOut, reviews_module",
-  "author": "Mataeux Gauthier",
+  "description": "TableTop, reviews_module",
+  "author": "Ryan DeCoster",
   "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
