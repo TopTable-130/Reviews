@@ -4,7 +4,7 @@ var cluster = require('cluster');
 const express = require('express');
 var numCPUs = require('os').cpus().length;
 const path = require('path');
-const db = require('../database/postgres/index.js');
+
 const controller = require (`./controller.js`);
 
   const app = express();

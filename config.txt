@@ -5,8 +5,13 @@ l
  scp -i wineman.pem /Users/ryandecoster/Desktop/Reviews-server1.zip ubuntu@ec2-13-56-16-182.us-west-1.compute.amazonaws.com:/home/ubuntu
 Archive.zip
 
+CREATE INDEX idx_reviewsByRestaurant
+ON review_list (id_restaurants);
 
 
+
+CREATE INDEX idx_reviewsByRestaurant_Date
+ON review_list (id_restaurants, date_review DESC);exit
 
 
  sudo -u postgres psql -U postgres -d postgres -a -f postgresSChema.sql

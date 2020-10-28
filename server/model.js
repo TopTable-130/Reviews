@@ -1,13 +1,16 @@
 
-const db = require('../database/postgres/index.js');
+const thing = require('../database/postgres/index.js');
 
 
 
 
-const getAllReviews = (params, callback) => {
-  const q = `SELECT * FROM review_list where id_restaurants = $1`;
-  // console.log(db.db, "the db info!!!")
- db.query(q,params, callback);
+const getAllReviews = ([params], callback) => {
+  console.log(params,"params params")
+  const q = `SELECT * FROM review_list WHERE id_restaurants = $1;`
+  // console.log(connecntion.db, "the db info!!!")
+  // console.log(q,"querry")
+  thing.db.query(q,['100',], callback);
+
 }
 
 const postNewReview =  ( params, callback) => {

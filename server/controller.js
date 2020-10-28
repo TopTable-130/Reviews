@@ -4,18 +4,18 @@ const model = require( `./model.js`);
 const getAllReviews = (req, res) => {
 
   const  { id } = req.params;
-
+console.log(id, "the id that is hit")
   const params = [id];
-  model.getAllReviews (params, (( err, results) => {
+  model.getAllReviews (params, ( err, results) => {
     if (err) {
 
       console.log(err, "we had an error in getAllReviews")
       res.status(400).send(err)
     } else {
-      // console.log("winning",results.rows[0])
+      console.log("winning",results.rows)
       res.status(200).send(results.rows)
     }
-  })
+  }
   )
 };
 
