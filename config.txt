@@ -13,6 +13,8 @@ ON review_list (id_restaurants);
 CREATE INDEX idx_reviewsByRestaurant_Date
 ON review_list (id_restaurants, date_review DESC);exit
 
+CREATE INDEX on users using hash (id);
+
 
  sudo -u postgres psql -U postgres -d postgres -a -f postgresSChema.sql
 
