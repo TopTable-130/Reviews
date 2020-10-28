@@ -1,9 +1,10 @@
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 var faker = require('faker');
-var writer1 = csvWriter();
-var writer2 = csvWriter();
-// var writer3= csvWriter();
+// var writer1 = csvWriter();
+// var writer2 = csvWriter()
+// var writer3 = csvWriter()
+
 // create array of first names 500 long
 var firstNames = []
 var lastNames = []
@@ -21,43 +22,54 @@ const randomInt = (max) => {
   return Math.floor(Math.random() * max) + 1
 }
 
+//
 //Random location generatior
 
 var location = []
 genLocation = () => {
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 201; i++) {
     location.push(faker.address.city())
   }
 }
 genLocation()
 //
 
+var userArr = []
+
 const dataGenUsers = (seed) => {
-  console.log("user gen start")
+  var writer1 = csvWriter();
   writer1.pipe(fs.createWriteStream('users.csv'));
-  var counter = 0;
+  var counter = 1;
   var countImage = 0
+
   for (var i = 0; i < seed; i++) {
 
 
-    writer1.write({
-      // id: counter+=1,
+    userArr.push(user)
+    var user = {
+      id: counter += 1,
       avatar: `https://sdc-reviews-130.s3-us-west-1.amazonaws.com/image${countImage}.jpg`,
-      name: firstNames[randomInt(10000)],
-      last: lastNames[randomInt(10000)],
+      first_name: firstNames[randomInt(10000)],
+      last_last: lastNames[randomInt(10000)],
       number_of_reviews: randomInt(120) + randomInt(120),
       locale: location[randomInt(200)]
-    })
+    }
+
+    writer1.write(user)
+
     // iterate counter for image ID
-    if (countImage = 2000) {
+    if (countImage === 2000) {
       countImage = 0;
-    } else { countImage += 1 }
+    } else {
+      countImage += 1
+    }
 
   }
 
-  console.log("done generating users")
   writer1.end();
-  return 'done'
+
+  console.log("done generating users ")
+  // console.log(userArr,"user array for grabbing things")
 };
 
 
@@ -96,17 +108,16 @@ const StartRating = () => {
 }
 
 const dataGenRestaurant = (seed) => {
-
-  writer2.pipe(fs.createWriteStream('restaurnt.csv'));
+  var writer1 = csvWriter();
+  writer1.pipe(fs.createWriteStream('restaurnt.csv'));
   var counter = 0;
 
   for (var i = 0; i < seed; i++) {
-    if (i % 10000 === 0) {
-      console.log(i)
-    }
+
     var stars = StartRating()
-    writer2.write({
-      // id: counter+=1,
+
+    writer1.write({
+      id: counter += 1,
       name_of_restaurant: restaurnantNameGen(),
       number_of_reviews: randomInt(25),
       rating_overall: (Math.random() * 5).toFixed(2),
@@ -125,46 +136,58 @@ const dataGenRestaurant = (seed) => {
       filters: filterArr[randomInt(6)]
     })
   }
-
-  console.log("done generating resturants")
-  writer2.end();
+  writer1.end();
+  console.log("done")
   return 'done'
 };
 
-// generate reviews
-// messsage helper
+
 const messages = [""]
 const messageGen = (seed) => {
-  for (var i = 0; i < seed; i++) {
+  for (var k = 0; k < seed; k++) {
     messages.push(faker.lorem.paragraph())
   }
 }
 
 messageGen(1000)
 // date generation over three montsh
+// zero padding helper function
+var zeroPadd = (number) => {
+  if (number < 10) {
+
+    return '0' + number
+  }
+  else {
+    return number
+  }
+}
 
 dateGen = () => {
-  var day = randomInt(28);
-  var month = randomInt(12);
+  var day = zeroPadd(randomInt(28))
+  var month = zeroPadd(randomInt(12));
   var year = 2000
   return newDate = `${year}-${month}-${day}`
 }
 
-const dataGenReviews = async (seed, fileName) => {
-
-  let writer3 = csvWriter();
-  writer3.pipe(fs.createWriteStream(fileName));
-  let counter = 0;
-
-  for (let i = 0; i < seed; i++) {
-    if (i % 10000 === 0) {
-      console.log(i)
+const dataGenReviews = async (seed, reviewbyRestName, reviewByUserName) => {
+  var writer1 = csvWriter();
+  var writer2 = csvWriter();
+  writer1.pipe(fs.createWriteStream(reviewbyRestName));
+  writer2.pipe(fs.createWriteStream(reviewByUserName));
+  var counter = 0;
+  var numberOfUsers = userArr.length - 1
+  for (var k = 0; k < seed; k++) {
+    if (k % 1000 === 0) {
+      console.log(k)
     }
-    var stars = StartRating()
-    let data = {
-      // id: counter+=1,
-      id_restaurants: randomInt(10000000),
-      id_user: randomInt(5000000),
+    var user = userArr[randomInt(numberOfUsers)]
+
+    var reviewObj = {
+      id_restaurants: randomInt(500),
+      id_user: user.id,
+      avatar: user.avatar,
+      first_name: user.first_name,
+      last_name: user.last_name,
       date_review: dateGen(),
       review_message: messages[randomInt(500)],
       rating_overall: randomInt(5),
@@ -175,28 +198,70 @@ const dataGenReviews = async (seed, fileName) => {
       noise_level: noiseArr[randomInt(4)],
       would_recommend: Math.floor(Math.random()),
       loved_for: lovedForArr[randomInt(6)],
-      loved_for: lovedForArr[randomInt(6)],
       filters: filterArr[randomInt(6)]
+
+    };
+
+    var reviewByRestaurant = {
+      id: counter += 1,
+      id_restaurants: reviewObj.id_restaurants,
+      avatar: reviewObj.avatar,
+      first_name: reviewObj.frist_name,
+      last_name: reviewObj.last_name,
+      date_review: reviewObj.date_review,
+      review_message: reviewObj.review_message,
+      rating_overall: reviewObj.rating_overall,
+      rating_recent: reviewObj.rating_recent,
+      rating_food: reviewObj.rating_food,
+      rating_service: reviewObj.rating_service,
+      rating_ambience: reviewObj.rating_ambience,
+      noise_level: reviewObj.noise_level,
+      would_recommend: reviewObj.would_recommend,
+      loved_for: reviewObj.loved_for,
+      filters: reviewObj.filters
     }
-    writer3.write(data)
-    // uncomment this line if seeding on a system that does not have 13 gigs ram to devote to seeding.
-    // this will slow it down and has a side effect.
-    // if (!writer3.write(data)) {
-    //   await new Promise(resolve => writer3.once('drain', resolve))
-    // }
+
+    var reviewByUsers = {
+      id: counter += 1,
+      id_user: reviewObj.id_restaurants,
+      avatar: reviewObj.avatar,
+      first_name: reviewObj.frist_name,
+      last_name: reviewObj.last_name,
+      date_review: reviewObj.date_review,
+      review_message: reviewObj.review_message,
+      rating_overall: reviewObj.rating_overall,
+      rating_recent: reviewObj.rating_recent,
+      rating_food: reviewObj.rating_food,
+      rating_service: reviewObj.rating_service,
+      rating_ambience: reviewObj.rating_ambience,
+      noise_level: reviewObj.noise_level,
+      would_recommend: reviewObj.would_recommend,
+      loved_for: reviewObj.loved_for,
+      filters: reviewObj.filters
+    }
+    writer2.write(reviewByUsers)
+    writer1.write(reviewByRestaurant)
+
+    if (k === (seed * .1) || k === (seed * .2) || k === (seed * .3) || k === (seed * .7) || k === (seed * .5) || k === (seed * .6) || k === (seed * .7) || k === (seed * .8) || k === (seed * .9)) {
+      await new Promise(resolve => writer1.once('drain', resolve))
+      await new Promise(resolve => writer2.once('drain', resolve))
+    }
   }
-  writer3.end();
-  console.log("done")
+
+  writer1.end()
+  writer2.end();
+  console.log("done", reviewbyRestName, reviewByUserName)
 };
 
-// node --max-old-space-size=13240 seedCSVs.js
 function genCSV() {
-  dataGenUsers(5000000);
-  dataGenReviews(8750000, "reviews1.csv")
-  dataGenReviews(8750000, "reviews2.csv")
-  dataGenReviews(8750000, "reviews3.csv")
-  dataGenReviews(8750000, "reviews4.csv")
-  dataGenRestaurant(10000000);
-  console.log("done with seeder function ")
+  dataGenUsers(5000001);
+  dataGenReviews(7500000, "reviewbyRest1.csv", "reviewbyuser1.csv");
+  dataGenReviews(7500000, "reviewbyRest2.csv", "reviewbyuser2.csv");
+  dataGenReviews(7500000, "reviewbyRest3.csv", "reviewbyuser3.csv");
+  dataGenRestaurant(10000000)
+
 }
 genCSV();
+
+
+// --max-old-space-size=13824 seedCSVcas.js
