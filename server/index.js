@@ -7,15 +7,6 @@ const path = require('path');
 const db = require('../database/postgres/index.js');
 const controller = require (`./controller.js`);
 
-// setting up cluster
-if (cluster.isMaster) {
-  for (var i = 0; i < numCPUs; i++) {
-      // Create a worker
-      cluster.fork();
-  }
-} else {
-
-
   const app = express();
   const PORT = 3002;
   // swithching out body parse to native javascript middleware
@@ -42,7 +33,7 @@ if (cluster.isMaster) {
     server,
     app,
   };
-};
+
 
 
 cluster.on('exit', function(worker, code, signal) {
