@@ -1,5 +1,5 @@
 
-// require('newrelic');
+require('newrelic');
 var cluster = require('cluster');
 const express = require('express');
 var numCPUs = require('os').cpus().length;
