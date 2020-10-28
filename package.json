@@ -1,8 +1,8 @@
 {
   "name": "review_service",
   "version": "1.0.0",
-  "description": "TKOut, reviews_module",
-  "author": "Mataeux Gauthier",
+  "description": "TableTop, reviews_module",
+  "author": "Ryan DeCoster",
   "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
@@ -13,19 +13,25 @@
     "start-once": "node server/index.js",
     "seed": "node database/data_seeding.js",
     "test": "jest",
+    "load-test": "k6 run k6/testingScript.js",
     "test:coverage": "jest --verbose --coverage"
   },
   "dependencies": {
     "axios": "^0.20.0",
     "body-parser": "^1.19.0",
+    "cassandra-driver": "^4.6.0",
+    "csv-write-stream": "^2.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "1.15.5",
     "express": "^4.17.1",
     "faker": "^5.1.0",
+    "image-downloader": "^4.0.1",
     "moment": "^2.29.0",
     "mysql": "^2.18.1",
+    "newrelic": "^6.13.2",
     "nodemon": "^2.0.4",
     "path": "0.12.7",
+    "pg": "^8.4.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

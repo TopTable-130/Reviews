@@ -24,4 +24,8 @@ coverage
 build/
 dist/
 public/
+images
+*.csv
 
+
+database/postgres/sqlfiles /

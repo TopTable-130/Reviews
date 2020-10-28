@@ -1,0 +1,31 @@
+ scp -i wineman.pem /Users/ryandecoster/Desktop/SDC/reviews-service/database/postgres/Archive.zip ubuntu@ec2-13-57-176-235.us-west-1.compute.amazonaws.com:/home/ubuntu
+Archive.zip
+l
+
+ scp -i wineman.pem /Users/ryandecoster/Desktop/Reviews-server1.zip ubuntu@ec2-13-56-16-182.us-west-1.compute.amazonaws.com:/home/ubuntu
+Archive.zip
+
+CREATE INDEX idx_reviewsByRestaurant
+ON review_list (id_restaurants);
+
+
+
+CREATE INDEX idx_reviewsByRestaurant_Date
+ON review_list (id_restaurants, date_review DESC);exit
+
+CREATE INDEX on users using hash (id);
+
+
+ sudo -u postgres psql -U postgres -d postgres -a -f postgresSChema.sql
+
+  sudo -u postgres psql -U postgres -d postgres -a -f 2.sql &&
+
+
+ awk -v l=110000 '(NR==1){header=$0;next}
+                (NR%l==2) {
+                   close(file);
+                   file=sprintf("%s.%0.5d.csv",FILENAME,++c)
+                   sub(/csv[.]/,"",file)
+                   print header > file
+                }
+                {print > file}' file.csv

@@ -1,11 +1,20 @@
 
-require('newrelic');
-// var cluster = require('cluster');
-// var numCPUs = require('os').cpus().length;
+// require('newrelic');
+var cluster = require('cluster');
 const express = require('express');
+var numCPUs = require('os').cpus().length;
 const path = require('path');
-
+const db = require('../database/postgres/index.js');
 const controller = require (`./controller.js`);
+
+// setting up cluster
+if (cluster.isMaster) {
+  for (var i = 0; i < numCPUs; i++) {
+      // Create a worker
+      cluster.fork();
+  }
+} else {
+
 
   const app = express();
   const PORT = 3002;
@@ -33,15 +42,12 @@ const controller = require (`./controller.js`);
     server,
     app,
   };
+};
 
 
+cluster.on('exit', function(worker, code, signal) {
+  console.log('Worker %d died with code/signal %s. Restarting worker...', worker.process.pid, signal || code);
+  cluster.fork();
+});
 
 
-
-//   process.on('exit',  ()=> {console.log( 'exiting program')
-//   setTimeout((function() {
-//     return process.exit(22);
-// }), 5000);
-//   ;
-//   return process.kill(process.pid)}
-//   );
