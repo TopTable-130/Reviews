@@ -139,7 +139,6 @@ const messageGen = (seed) => {
     messages.push(faker.lorem.paragraph())
   }
 }
-
 messageGen(1000)
 // date generation over three montsh
 

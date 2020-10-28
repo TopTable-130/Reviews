@@ -5,6 +5,7 @@ const mysqlConfig = require('./config.js');
 const connection = mysql.createConnection(mysqlConfig);
 
 const getRestaurantRating = (id, callback) => {
+  db.connect()
   const q = `SELECT * FROM restaurants where id = ${id};`;
   connection.query(q, (err, data) => {
     if (err) {
@@ -14,6 +15,7 @@ const getRestaurantRating = (id, callback) => {
       // console.log('successful MySQL select * from transactions query');
       callback(null, data);
     }
+    db.end()
   });
 };
 

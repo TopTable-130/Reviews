@@ -1,17 +1,28 @@
 /* eslint-disable no-console */
 
 require('newrelic');
+var cluster = require('cluster');
 const express = require('express');
+var numCPUs = require('os').cpus().length;
 const path = require('path');
-// const db = require('../database/postgres/index.js');
+const db = require('../database/postgres/index.js');
 const controller = require (`./controller.js`);
+
+// setting up cluster
+if (cluster.isMaster) {
+  for (var i = 0; i < numCPUs; i++) {
+      // Create a worker
+      cluster.fork();
+  }
+} else {
 
 
   const app = express();
   const PORT = 3002;
-
+  // swithching out body parse to native javascript middleware
   app.use(express.json())
-
+  // app.use(bodyParser.json());
+  // app.use(bodyParser.urlencoded({ extended: true }));
   app.use(express.static(path.join(__dirname, '../public/')));
 
   app.get(`/resturant/:id/reviews`,controller.getAllReviews)
@@ -32,9 +43,13 @@ const controller = require (`./controller.js`);
     server,
     app,
   };
+};
 
 
-
+cluster.on('exit', function(worker, code, signal) {
+  console.log('Worker %d died with code/signal %s. Restarting worker...', worker.process.pid, signal || code);
+  cluster.fork();
+});
 
 
 
