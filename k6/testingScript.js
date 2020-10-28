@@ -11,11 +11,16 @@ const randomInt = (max) => {
 
 export let options = {
   stages: [
-    { duration: '10s', target: 400 },
-    { duration: '30s', target: 400 },
-    { duration: '5s', target: 500 },
+    { duration: '10s', target: 10 },
+    { duration: '30s', target: 10 },
+    { duration: '5s', target: 100 },
+    { duration: '30s', target: 100 },
+    { duration: '5s', target: 200 },
+    { duration: '30s', target: 200 },
+    { duration: '5s', target: 500},
     { duration: '30s', target: 500 },
-
+    { duration: '5s', target: 1000},
+    { duration: '30s', target: 1000 },
 
   ],
 };

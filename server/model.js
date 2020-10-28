@@ -5,7 +5,7 @@ const thing = require('../database/postgres/index.js');
 
 
 const getAllReviews = ([params], callback) => {
-  console.log(params,"params params")
+
   const q = `SELECT * from review_list INNER JOIN users ON review_list.id_user = users.id WHERE review_list.id_restaurants = $1;`
   // console.log(connecntion.db, "the db info!!!")
   // console.log(q,"querry")

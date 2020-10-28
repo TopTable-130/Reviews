@@ -1,8 +1,8 @@
 
 require('newrelic');
-var cluster = require('cluster');
+// var cluster = require('cluster');
+// var numCPUs = require('os').cpus().length;
 const express = require('express');
-var numCPUs = require('os').cpus().length;
 const path = require('path');
 
 const controller = require (`./controller.js`);
@@ -36,9 +36,12 @@ const controller = require (`./controller.js`);
 
 
 
-cluster.on('exit', function(worker, code, signal) {
-  console.log('Worker %d died with code/signal %s. Restarting worker...', worker.process.pid, signal || code);
-  cluster.fork();
-});
 
 
+//   process.on('exit',  ()=> {console.log( 'exiting program')
+//   setTimeout((function() {
+//     return process.exit(22);
+// }), 5000);
+//   ;
+//   return process.kill(process.pid)}
+//   );

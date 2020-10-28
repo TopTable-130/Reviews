@@ -1,6 +1,6 @@
-const { Client } = require('pg')
+const { Pool } = require('pg')
 const config = require('./config.js')
-const db = new Client(config)
+const db = new Pool(config)
 var connection = db.connect()
 console.log(db)
 db.query(`SELECT * FROM restaurants where id = $1;`,['5'], (err, res) => {
