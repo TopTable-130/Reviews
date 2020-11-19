@@ -3,7 +3,7 @@ Topable
 
 
 ## Related Legacy Projects (Front End)
-> TKOut
+
 
   - Popular Dishes Service - Anna - https://github.com/TKOut-HRSF130/popular-dishes-service
   - Photos Carousel Service - Billy - https://github.com/TKOut-HRSF130/photos-carousel-service
