@@ -1,127 +1,64 @@
-# Project Name
-TopTable 
 
+# TopTable Reviews Service
 
-## Related Legacy Projects (Front End)
+TopTable provides a scalable backend architecture for a production-ready Microservices, designed to host reviews for up to 10 million restaurants.
 
-
-  - Popular Dishes Service - Anna - https://github.com/TKOut-HRSF130/popular-dishes-service
-  - Photos Carousel Service - Billy - https://github.com/TKOut-HRSF130/photos-carousel-service
-  - Bookings Service - Johnny - https://github.com/TKOut-HRSF130/bookings-service
-  - Reviews Service - Mataeux - https://github.com/TKOut-HRSF130/reviews-service
-
-
-
-## Server API
-
-### Get  all restaurant reviews
-  * GET `/restaurant/:id/reviews`
-
-**Path Parameters:**
-  * `id` restaurant id
-
-**Success Status Code:** `200`
-
-**Returns:** JSON
-
-```json
-  [
-    {
-      "id": "Number",
-      "id_restaurants": "Number",
-      "avatar": "Image URL",
-      "first_name": "String",
-      "last_name": "String",
-      "number_of_reviews": "Number",
-      "locale": "Ondrickaborough",
-      "date_review" : "Date"
-      "review_message": "String",
-      "rating_overall": "Number",
-      "rating_recent": "Number",
-      "rating_food": "Number",
-      "rating_service": "Number",
-      "rating_ambience": "Number",
-      "noise_level": "String",
-      "would_recommend": "Number",
-      "loved_for": "String",
-      "filters": "String"
-  },
-]
-```
-
-### Add restaurant reviews
-  * POST `/restaurant/:id/reviews/:user`
-**Path Parameters:**
-  * `:id` restaurant id, `:user` user id
-**Success Status Code:** `200`
-
-**Request Body**: Expects JSON with the following keys.
-
-```json
-    
-  {
-    
-     "id_restaurants": "Number",
-      "avatar": "Image URL",
-      "first_name": "Emmet",
-      "last_name": "Streich",
-      "number_of_reviews": "Number",
-      "locale": "String",
-      "review_message": "String",
-      "rating_overall": "Number",
-      "rating_recent": "Number",
-      "rating_food": "Number",
-      "rating_service": "Number",
-      "rating_ambience": "Number",
-      "noise_level": "String",
-      "would_recommend": "Number",
-      "loved_for": "String",
-      "filters": "String"
-  }
-    
-```
-
-
-### Update restaurant Review
-  * PATCH `/restaurant/:id/reivews/:reviewId`
-
-**Path Parameters:**
-  * `id` restaurant id, `:reviewId` review Id
-
-**Success Status Code:** `204`
-
-**Request Body**: Expects JSON with any of the following keys (include only keys to be updated)
-
-```json
-    {
-       "review_message": "String",
-      "rating_overall": "Number",
-      "rating_recent": "Number",
-      "rating_food": "Number",
-      "rating_service": "Number",
-      "rating_ambience": "Number",
-      "noise_level": "String",
-      "would_recommend": "Number",
-      "loved_for": "String",
-    }
-```
-
-### Delete restaurant review
-  * DELETE '/restaurant/:id/reviews/:reviewId'`
-
-**Path Parameters:**
- * `id` restaurant id, `:reviewId` review Id
-
-**Success Status Code:** `204`
-+
-
-
+[![version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/TKOut-HRSF130/reviews-service/releases/tag/1.0.0)
+[![license](https://img.shields.io/badge/license-ISC-brightgreen)](./LICENSE)
 
 ## Table of Contents
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+- [Related Legacy Projects (Front End)](#related-legacy-projects-front-end)
+- [Server API](#server-api)
+  - [Get all restaurant reviews](#get-all-restaurant-reviews)
+  - [Add restaurant reviews](#add-restaurant-reviews)
+  - [Update restaurant review](#update-restaurant-review)
+  - [Delete restaurant review](#delete-restaurant-review)
+- [Usage](#usage)
+- [Requirements](#requirements)
+- [Development](#development)
+- [Scripts](#scripts)
+- [Dependencies](#dependencies)
+
+## Related Projects (Front End)
+
+- [Popular Dishes Service ](https://github.com/TKOut-HRSF130/popular-dishes-service)
+- [Photos Carousel Service ](https://github.com/TKOut-HRSF130/photos-carousel-service)
+- [Bookings Service ](https://github.com/TKOut-HRSF130/bookings-service)
+- [Reviews Service ](https://github.com/TKOut-HRSF130/reviews-service)
+
+## Server API
+
+### Get all restaurant reviews
+
+- **Method:** `GET`
+- **Path:** `/restaurant/:id/reviews`
+- **Path Parameters:** `id` - restaurant id
+- **Success Status Code:** `200`
+- **Response:** JSON, array of review objects as described below.
+
+### Add restaurant reviews
+
+- **Method:** `POST`
+- **Path:** `/restaurant/:id/reviews/:user`
+- **Path Parameters:** `id` - restaurant id, `user` - user id
+- **Success Status Code:** `200`
+- **Request Body:** JSON, review object structure as described below.
+
+### Update restaurant review
+
+- **Method:** `PATCH`
+- **Path:** `/restaurant/:id/reviews/:reviewId`
+- **Path Parameters:** `id` - restaurant id, `reviewId` - review id
+- **Success Status Code:** `204`
+- **Request Body:** JSON, keys to be updated from review object.
+
+### Delete restaurant review
+
+- **Method:** `DELETE`
+- **Path:** `/restaurant/:id/reviews/:reviewId`
+- **Path Parameters:** `id` - restaurant id, `reviewId` - review id
+- **Success Status Code:** `204`
 
 ## Usage
 
@@ -132,15 +69,40 @@ TopTable
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- etc
+- and more...
 
 ## Development
 
 ### Installing Dependencies
 
 From within the root directory:
-
 ```sh
 npm install -g webpack
 npm install
 ```
+
+## Scripts
+
+- Start Webpack in development mode: `npm run react-dev`
+- Start the server with nodemon: `npm start`
+- Start the server once: `npm run start-once`
+- Seed the database: `npm run seed`
+- Run Jest tests: `npm test`
+- Run k6 tests: `npm run load-test`
+- Run Jest tests with coverage: `npm run test:coverage`
+
+## Dependencies
+
+- Main: `axios`, `body-parser`, `express`, `react`, `styled-components` and others.
+- Dev: `@babel/core`, `jest`, `webpack` and others.
+
+For a full list of dependencies, please refer to the `package.json`.
+
+## Contributing
+
+Please fork the repository, create a feature branch, and submit a Pull Request. Ensure that tests pass and that your changes meet the project's coding standards before submitting.
+
+[GitHub Repository](https://github.com/TKOut-HRSF130/reviews-service)
+```
+
+This README is structured to be comprehensive and informative. Adjust as needed for your project's requirements.
