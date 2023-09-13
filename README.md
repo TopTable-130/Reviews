@@ -1,4 +1,3 @@
-
 # TopTable Reviews Service
 
 TopTable provides a scalable backend architecture for a production-ready Microservices, designed to host reviews for up to 10 million restaurants.
